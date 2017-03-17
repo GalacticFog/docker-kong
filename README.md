@@ -11,11 +11,11 @@ A fork of [mashape/kong][docker-kong], with a bias towards postgres and better s
 
 ```shell
 $ docker run -d --name kong \
-    -e "POSTGRES_HOST=postgres" \
+    -e "POSTGRES_HOSTNAME=postgres" \
     -e "POSTGRES_PORT=5432" \
-    -e "POSTGRES_DBNAME=kong" \
-    -e "POSTGRES_DBUSER=kong" \
-    -e "POSTGRES_DBPASS=letmein" \
+    -e "POSTGRES_NAME=kong" \
+    -e "POSTGRES_USER=kong" \
+    -e "POSTGRES_PASS=letmein" \
     -p 8000:8000 \
     -p 8443:8443 \
     -p 8001:8001 \
