@@ -21,7 +21,7 @@ EOSQL
 }
 
 # create a .pgpass file which is used for psql
-echo "$POSTGRES_HOSTNAME:$POSTGRES_PORT:*:$POSTGRES_USER:$POSTGRES_PASSWORD \n" >> ~/.pgpass
+echo "$POSTGRES_HOSTNAME:$POSTGRES_PORT:*:$POSTGRES_USER:$POSTGRES_PASSWORD" >> ~/.pgpass
 
 # check that our database exists
 psql -h $POSTGRES_HOSTNAME -p $POSTGRES_PORT -U $POSTGRES_USER -lqt | cut -d \| -f 1 | grep -qw $POSTGRES_NAME
