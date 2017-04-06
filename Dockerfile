@@ -6,6 +6,7 @@ ENV KONG_VERSION 0.8.0
 RUN yum install -y epel-release
 RUN yum install -y https://github.com/Mashape/kong/releases/download/$KONG_VERSION/kong-$KONG_VERSION.el7.noarch.rpm && \
     yum clean all
+RUN yum install -y postgresql-server postgresql-contrib
 
 VOLUME ["/etc/kong/"]
 
