@@ -1,0 +1,104 @@
+{
+  "name": "default-kong-provider",
+  "resource_type": "Gestalt::Configuration::Provider::Kong",
+  "description": "The default gestalt kong provider",
+  "properties": {
+    "services": [
+      {
+        "init": {
+          "binding": "eager",
+          "singleton": true
+        },
+        "container_spec": {
+          "name": "debug-kong",
+          "properties": {
+            "cpus": 0.2,
+            "memory": 1024,
+            "accepted_resource_roles": [
+              "production",
+              "*"
+            ],
+            "env": {},
+            "num_instances": 1,
+            "network": "BRIDGE",
+            "container_type": "DOCKER",
+            "image": "galacticfog/docker-kong:0.10.3-debug",
+            "force_pull": true,
+            "health_checks": [
+              {
+                "grace_period_seconds": 300,
+                "interval_seconds": 60,
+                "max_consecutive_failures": 3,
+                "path": "/",
+                "port_index": 1,
+                "port_type": "index",
+                "protocol": "HTTP",
+                "timeout_seconds": 20
+              }
+            ],
+            "provider": {
+              "id": "1cdee59d-c0d0-448c-b6e3-aed706eb7237"
+            },
+            "labels": {},
+            "port_mappings": [
+              {
+                "name": "public-url",
+                "protocol": "tcp",
+                "container_port": 8000,
+                "expose_endpoint": true,
+                "virtual_hosts": [
+                  "gtw1.test.galacticfog.com"
+                ]
+              },
+              {
+                "name": "service",
+                "protocol": "tcp",
+                "container_port": 8001,
+                "expose_endpoint": true
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parent": {
+      "typeId": "23ba3299-b04e-4c5c-9b3d-64939b22944e",
+      "id": "d45b81b2-2e54-482e-b257-2bfdd50f90e3",
+      "name": "root",
+      "href": "http://172.16.6.52:25159/root"
+    },
+    "linked_providers": [
+      {
+        "name": "POSTGRES",
+        "id": "c8f61d45-769a-4cdd-a373-04f0e65c0f6a",
+        "type": "5cdb00e9-2861-4a02-a4ab-c926d7200490"
+      }
+    ],
+    "config": {
+      "env": {
+        "public": {
+          "SERVICE_PORT": "8001",
+          "POSTGRES_USER": "gestaltdev",
+          "POSTGRES_PASSWORD": "letmein",
+          "POSTGRES_HOSTNAME": "data-0.gestalt-test-tasks.marathon.mesos",
+          "SERVICE_HOST": "default-kong.services.default-kong-provider.root.marathon.l4lb.thisdcos.directory",
+          "PUBLIC_URL_PORT": "8000",
+          "POSTGRES_META_ID": "c8f61d45-769a-4cdd-a373-04f0e65c0f6a",
+          "PUBLIC_URL_HOST": "default-kong.services.default-kong-provider.root.marathon.l4lb.thisdcos.directory",
+          "POSTGRES_NAME": "default-kong-db",
+          "PASSWORD": "currently",
+          "USERNAME": "unuse",
+          "POSTGRES_PORT": "5432",
+          "PUBLIC_URL_VHOST_0": "gtw1.test.galacticfog.com",
+          "PUBLIC_URL_PROTOCOL": "tcp",
+          "SERVICE_PROTOCOL": "tcp",
+          "POSTGRES_PROTOCOL": "tcp"
+        },
+        "private": {
+          "POSTGRES_NAME": "default-kong-db"
+        }
+      },
+      "external_protocol": "https"
+    }
+  }
+}

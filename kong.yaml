@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kong
+spec:
+  replicas: 1
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        gestalt-app: kong
+    spec:
+      containers:
+      - name: kong
+        image: galacticfog/docker-kong:0.10.3-debug7
+        ports:
+        - containerPort: 8000
+          name: gateway-port
+        - containerPort: 8001
+          name: service-port
+        env:
+        - name: POSTGRES_HOSTNAME
+          value: '192.168.1.5'
+        - name: POSTGRES_PORT
+          value: '5432'
+        - name: POSTGRES_NAME
+          value: 'kong_new'
+        - name: POSTGRES_USER
+          value: 'gestaltdev'
+        - name: POSTGRES_PASSWORD
+          value: 'password'

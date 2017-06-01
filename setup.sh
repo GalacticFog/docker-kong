@@ -1,16 +1,20 @@
-#!/bin/sh
+#!/usr/local/bin/dumb-init /bin/sh
+set -x
+
+# Disabling nginx daemon mode
+export KONG_NGINX_DAEMON="off"
 
 read -r -d '' DATABASE <<EOM
-database: ${DATABASE-postgres}
-postgres:
-  host: "${POSTGRES_HOSTNAME-postgres}"
-  port: ${POSTGRES_PORT-5432}
-  database: ${POSTGRES_NAME-kong}
-  user: ${POSTGRES_USER-kong}
-  password: ${POSTGRES_PASSWORD-letmein} 
+database = ${DATABASE-postgres}
+pg_host = ${POSTGRES_HOSTNAME-postgres}
+pg_port = ${POSTGRES_PORT-5432}
+pg_database = ${POSTGRES_NAME-kong}
+pg_user = ${POSTGRES_USER-kong}
+pg_password = ${POSTGRES_PASSWORD-letmein} 
+pg_ssl = off
 EOM
 
-echo "$DATABASE" >> /etc/kong/kong.yml
+echo "$DATABASE" >> /etc/kong/kong.conf
 
 __create_db() {
 
@@ -34,3 +38,6 @@ else
   echo "database does not exist, creating..."
   __create_db $POSTGRES_NAME
 fi
+
+# run the command that's passed in
+exec "$@"
