@@ -18,6 +18,12 @@ COPY config.docker/kong.yml /etc/kong/kong.yml
 ADD setup.sh setup.sh
 RUN chmod +x setup.sh
 
+RUN yum install -y tar && yum clean all
+RUN mkdir -p /usr/local/custom
+RUN chmod +rwx /usr/local/custom
+COPY gestalt-security-kong.tar /usr/local/custom/gestalt-security-kong.tar
+RUN cd /usr/local/custom && chmod +rx gestalt-security-kong.tar && tar xvf ./gestalt-security-kong.tar
+
 ENTRYPOINT ["./setup.sh"]
 
 EXPOSE 8000 8443 8001 7946

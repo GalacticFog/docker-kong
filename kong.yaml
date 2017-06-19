@@ -28,3 +28,7 @@ spec:
           value: 'gestaltdev'
         - name: POSTGRES_PASSWORD
           value: 'password'
+        - name: KONG_LUA_PACKAGE_PATH
+          value: '/usr/local/custom/?.lua;;'
+        - name: KONG_CUSTOM_PLUGINS
+          value: 'gestalt-security-kong'
