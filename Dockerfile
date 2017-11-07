@@ -13,7 +13,7 @@ RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/
 
 VOLUME ["/etc/kong/"]
 
-COPY config.docker/kong.yml /etc/kong/kong.yml
+COPY config.docker/custom_nginx.template /etc/kong/custom_nginx.template
 
 ADD setup.sh setup.sh
 RUN chmod +x setup.sh
@@ -27,4 +27,4 @@ RUN cd /usr/local/custom && chmod +rx gestalt-security-kong.tar && tar xvf ./ges
 ENTRYPOINT ["./setup.sh"]
 
 EXPOSE 8000 8443 8001 7946
-CMD ["kong", "start"]
+CMD ["kong", "start", "--conf", "/etc/kong/kong.conf", "--nginx-conf", "/etc/kong/custom_nginx.template", "--vv"]
