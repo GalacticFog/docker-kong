@@ -23,7 +23,7 @@ RUN mkdir -p /usr/local/custom
 RUN chmod +rwx /usr/local/custom
 COPY gestalt-security-kong.tar /usr/local/custom/gestalt-security-kong.tar
 RUN cd /usr/local/custom && chmod +rx gestalt-security-kong.tar && tar xvf ./gestalt-security-kong.tar
-RUN Yyum upgrade -y
+RUN yum upgrade -y
 
 ENTRYPOINT ["./setup.sh"]
 
