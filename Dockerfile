@@ -1,5 +1,5 @@
 FROM centos:7
-MAINTAINER Brad Futch, brad@galacticfog.com
+MAINTAINER Anthony Skipper, anthony@galacticfog.com
 
 ENV KONG_VERSION 0.10.3
 
@@ -23,6 +23,7 @@ RUN mkdir -p /usr/local/custom
 RUN chmod +rwx /usr/local/custom
 COPY gestalt-security-kong.tar /usr/local/custom/gestalt-security-kong.tar
 RUN cd /usr/local/custom && chmod +rx gestalt-security-kong.tar && tar xvf ./gestalt-security-kong.tar
+RUN Yyum upgrade -y
 
 ENTRYPOINT ["./setup.sh"]
 
