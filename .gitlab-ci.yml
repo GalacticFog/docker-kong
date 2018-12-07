@@ -70,7 +70,6 @@ auto-deploy-master:
   allow_failure: false
   only: 
     - ${MASTER_BRANCH_NAME}
-  when: manual
 
 manual-deploy-non-master:
   <<: *deploy_to_test
