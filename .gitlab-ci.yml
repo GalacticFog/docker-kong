@@ -62,7 +62,7 @@ github-publish:
     - test-cluster
   script: 
     - DOCKER_TAG=${CI_BUILD_TAG-$VERSION-${CI_BUILD_REF:0:8}}
-    - echo "You need manually change Kong Image to: $DOCKER_IMG:$DOCKER_TAG"
+    - echo You need manually change Kong Image to: $DOCKER_IMG:$DOCKER_TAG
     # - echo "Next publish $CI_URL image=$DOCKER_IMG:$DOCKER_TAG redeploy:=true provider_type=Kong git_ref=$CI_COMMIT_REF_NAME git_sha=$CI_COMMIT_SHA git_author=$GITLAB_USER_NAME"
     # - http --check-status -a "$API_KEY":"$API_SECRET" --ignore-stdin $CI_URL image=$DOCKER_IMG:$DOCKER_TAG redeploy:=true provider_type=Kong git_ref=$CI_COMMIT_REF_NAME git_sha=$CI_COMMIT_SHA git_author="$GITLAB_USER_NAME"
   allow_failure: true
