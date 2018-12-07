@@ -37,6 +37,7 @@ docker-build-and-publish:
     - docker rmi      $DOCKER_IMG:$DOCKER_TAG
 
 github-publish:
+  image: galacticfog/gitlab-updater
   stage: publish
   script: 
     - git remote remove github || true
