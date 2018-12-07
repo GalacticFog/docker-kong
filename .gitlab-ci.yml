@@ -72,7 +72,7 @@ auto-deploy-master:
   allow_failure: false
   only: 
     - ${MASTER_BRANCH_NAME}
-    - '0.10.3-better-config'
+    - 0.10.3-better-config
 
 manual-deploy-non-master:
   <<: *deploy_to_test
