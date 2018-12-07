@@ -3,7 +3,6 @@ image: docker:latest
 stages:
 - build
 - publish
-- deploy
 
 variables:
   DOCKER_IMG: "galacticfog/kong"
@@ -50,32 +49,6 @@ github-publish:
          git push -f github $CI_BUILD_TAG
       fi
   only:
-    - 0.10.3-better-config
+    - ${MASTER_BRANCH_NAME}
     - tags
   artifacts:
-
-.deploy_template: &deploy_to_test
-  image: galacticfog/gitlab-updater
-  stage: deploy
-  environment: test
-  tags: 
-    - test-cluster
-  script: 
-    - DOCKER_TAG=${CI_BUILD_TAG-$VERSION-${CI_BUILD_REF:0:8}}
-    - echo "You need manually change Kong Image to: $DOCKER_IMG:$DOCKER_TAG"
-  allow_failure: true
-  artifacts:
-  
-auto-deploy-master:
-  <<: *deploy_to_test
-  allow_failure: false
-  only: 
-    - ${MASTER_BRANCH_NAME}
-    - 0.10.3-better-config
-
-manual-deploy-non-master:
-  <<: *deploy_to_test
-  allow_failure: true
-  except: 
-    - ${MASTER_BRANCH_NAME}
-  when: manual
