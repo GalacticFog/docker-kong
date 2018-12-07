@@ -7,7 +7,7 @@ stages:
 variables:
   DOCKER_IMG: "galacticfog/kong"
   LEGACY_CI_URL: "https://gtw1.demo.galacticfog.com/ci/legacy-ci"
-  VERSION: "release-2.3.8"
+  VERSION: "release-2.3.9"
   REPOSITORY_NAME: "docker-kong"
   MASTER_BRANCH_NAME: "0.10.3-better-config"
   PROVIDER_TYPE: "Kong"
