@@ -49,6 +49,6 @@ github-publish:
          git push -f github $CI_BUILD_TAG
       fi
   only:
-    - 0.10.3-better-config
+    - $MASTER_BRANCH_NAME
     - tags
   artifacts:
