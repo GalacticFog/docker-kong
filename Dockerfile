@@ -13,7 +13,11 @@ RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/
 
 VOLUME ["/etc/kong/"]
 
-COPY config.docker/kong.yml /etc/kong/kong.yml
+# TODO: This file doesn't seem to be used anymore
+# COPY config.docker/kong.yml /etc/kong/kong.yml
+
+# Overrite the nginx_kong.lua Kong uses to generate the /usr/local/kong/nginx-kong.conf file
+COPY config.docker/nginx_kong.lua /usr/local/share/lua/5.1/kong/templates/nginx_kong.lua
 
 ADD setup.sh setup.sh
 RUN chmod +x setup.sh
