@@ -143,6 +143,10 @@ server {
         }
     }
 
+    location = /health {
+	return 200 'API Gateway is Healthy!';
+    }
+
     location = /kong_error_handler {
         internal;
         content_by_lua_block {
